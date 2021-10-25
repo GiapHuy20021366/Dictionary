@@ -16,6 +16,7 @@ import javax.swing.plaf.basic.BasicPasswordFieldUI;
 public class TextToSpeech extends Thread{
 	private static Player player = null;
     public static boolean playerIsPlaying = true;
+    public static String voicessAPIKey = "";
     public static void downloadEnglishVoice(String word, String voiceName, int speed) {
     	new TextToSpeech(word, "English", voiceName, speed, word).start();
     }
@@ -111,7 +112,7 @@ public class TextToSpeech extends Thread{
     	writeBytes(word, language, voiceName, speed, path);
     }
     private static void writeBytes(String word, String language, String voiceName, int speed, String path) throws Exception {
-    	VoiceProvider tts = new VoiceProvider("6a2a3ddaf6034171af0c36787219d641");
+    	VoiceProvider tts = new VoiceProvider(voicessAPIKey);
     	VoiceParameters params = new VoiceParameters(word, Languages.codeVoiceOf(language));
     	params.setCodec(AudioCodec.MP3);
         params.setFormat(AudioFormat.Format_44KHZ.AF_44khz_16bit_stereo);

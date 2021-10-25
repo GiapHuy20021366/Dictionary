@@ -24,6 +24,7 @@ import javax.swing.text.AttributeSet.ColorAttribute;
 import javax.xml.stream.events.StartDocument;
 
 import com.mysql.cj.api.jdbc.Statement;
+import com.mysql.cj.x.protobuf.MysqlxNotice.Frame;
 
 import DectectedLanguageLib.DetectLanguage;
 import MyLib.Languages;
@@ -67,6 +68,7 @@ import javax.swing.event.CaretEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.swing.ImageIcon;
@@ -75,10 +77,11 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeListener;
 import javax.swing.plaf.synth.ColorType;
 import javax.swing.event.ChangeEvent;
+import java.awt.Toolkit;
 
 public class App {
 
-	private JFrame frame;
+	private JFrame frmDictionary;
 	private JPanel tabTranslate;
 	private JPanel tabSearch;
 	private JTabbedPane tabbedPane;
@@ -120,7 +123,7 @@ public class App {
 			public void run() {
 				try {
 					App window = new App();
-					window.frame.setVisible(true);
+					window.frmDictionary.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -130,8 +133,12 @@ public class App {
 
 	/**
 	 * Create the application.
+	 * @throws FileNotFoundException 
 	 */
-	public App() {
+	public App() throws FileNotFoundException {
+		// Set API Key
+		MyLib.API.setAPI();
+		
 		initialize();
 		//AutoCompleteDecorator.decorate(comboBox);
 	}
@@ -140,12 +147,16 @@ public class App {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBackground(Color.WHITE);
-		frame.getContentPane().setBackground(Color.PINK);
-		frame.setBounds(100, 100, 1120, 768);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmDictionary = new JFrame();
+		frmDictionary.setResizable(false);
+		frmDictionary.setTitle("Dictionary");
+		frmDictionary.setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\Eclipse\\TuDien\\Icon\\Dictionary2.png"));
+		frmDictionary.setBackground(Color.PINK);
+		frmDictionary.getContentPane().setBackground(Color.PINK);
+		frmDictionary.setBounds(100, 100, 1120, 768);
+		frmDictionary.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmDictionary.getContentPane().setLayout(null);
+		
 		
 		UIManager.put("TabbedPane.selected", Color.YELLOW);
 		
@@ -156,7 +167,7 @@ public class App {
 		tabbedPane.setBorder(null);
 		tabbedPane.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tabbedPane.setBounds(0, 0, 1109, 733);
-		frame.getContentPane().add(tabbedPane);
+		frmDictionary.getContentPane().add(tabbedPane);
 	
 		 
 		tabSearch = new JPanel();
@@ -368,10 +379,10 @@ public class App {
 		antonyms.setWrapStyleWord(true);
 		scrollPane_4.setViewportView(antonyms);
 		
-		lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setIcon(new ImageIcon("D:\\Eclipse\\TuDien\\Background\\DarkTheme\\Pink.jpg"));
-		lblNewLabel_2.setBounds(0, 0, 1121, 712);
-		tabSearch.add(lblNewLabel_2);
+		backgroundSearch = new JLabel("");
+		backgroundSearch.setIcon(new ImageIcon("D:\\Eclipse\\TuDien\\Background\\DarkTheme\\Pink.jpg"));
+		backgroundSearch.setBounds(0, 0, 1121, 712);
+		tabSearch.add(backgroundSearch);
 		
 		
 		lblNewLabel_3 = new JLabel("New label");
@@ -545,7 +556,7 @@ public class App {
 		tabTranslate.add(swapLanguage);
 		
 		list_Language1 = new JComboBox<>();
-		list_Language1.setBackground(new Color(176, 224, 230));
+		list_Language1.setBackground(Color.PINK);
 		list_Language1.setAutoscrolls(true);
 		list_Language1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -579,7 +590,7 @@ public class App {
 		tabTranslate.add(list_Language1);
 		
 		list_Language2 = new JComboBox<String>();
-		list_Language2.setBackground(new Color(176, 224, 230));
+		list_Language2.setBackground(Color.PINK);
 		list_Language2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Boolean isSupported = Languages.isSupportVoiceInVietnamese((String)list_Language2.getSelectedItem());
@@ -619,7 +630,6 @@ public class App {
 		tabTranslate.add(translateButton);
 		
 		detectLanguage = new JButton("");
-		detectLanguage.setHorizontalAlignment(SwingConstants.LEFT);
 		detectLanguage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int index = MyLib.Languages.list.indexOf(languageFinded);
@@ -629,14 +639,14 @@ public class App {
 			}
 		});
 		detectLanguage.setVisible(false);
-		detectLanguage.setBackground(new Color(176, 224, 230));
+		detectLanguage.setBackground(Color.PINK);
 		detectLanguage.setBounds(223, 38, 231, 35);
 		tabTranslate.add(detectLanguage);
 		
-		lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("D:\\Eclipse\\TuDien\\Background\\DarkTheme\\Pink.jpg"));
-		lblNewLabel_1.setBounds(0, -32, 1104, 731);
-		tabTranslate.add(lblNewLabel_1);
+		backGroundTranslate = new JLabel("");
+		backGroundTranslate.setIcon(new ImageIcon("D:\\Eclipse\\TuDien\\Background\\DarkTheme\\Pink.jpg"));
+		backGroundTranslate.setBounds(0, -32, 1104, 731);
+		tabTranslate.add(backGroundTranslate);
 		
 		//Set listLanguage1
 		String languageCurrent = (String)list_Language1.getSelectedItem();
@@ -804,9 +814,9 @@ public class App {
 	private Thread findLanguage = null;
 	private String languageFinded = ""; 
 	private JButton detectLanguage;
-	private JLabel lblNewLabel_1;
+	private JLabel backGroundTranslate;
 	private JLabel lblNewLabel_3;
-	private JLabel lblNewLabel_2;
+	private JLabel backgroundSearch;
 	private void findLanguage() {
 		if (findLanguage != null) {
 			if (findLanguage.isAlive()) {
