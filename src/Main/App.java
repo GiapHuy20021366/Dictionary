@@ -150,7 +150,7 @@ public class App {
 		frmDictionary = new JFrame();
 		frmDictionary.setResizable(false);
 		frmDictionary.setTitle("Dictionary");
-		frmDictionary.setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\Eclipse\\TuDien\\Icon\\Dictionary2.png"));
+		frmDictionary.setIconImage(Toolkit.getDefaultToolkit().getImage(".\\Icon\\Dictionary2.png"));
 		frmDictionary.setBackground(Color.PINK);
 		frmDictionary.getContentPane().setBackground(Color.PINK);
 		frmDictionary.setBounds(100, 100, 1120, 768);
@@ -252,8 +252,8 @@ public class App {
 		speakSearch.setHorizontalTextPosition(SwingConstants.CENTER);
 		speakSearch.setVerifyInputWhenFocusTarget(false);
 		speakSearch.setBorder(null);
-		speakSearch.setIcon(new ImageIcon("D:\\Eclipse\\TuDien\\Icon\\volume32pixels.png"));
-		speakSearch.setSelectedIcon(new ImageIcon("D:\\Eclipse\\TuDien\\Icon\\speaker.png"));
+		speakSearch.setIcon(new ImageIcon(".\\Icon\\volume32pixels.png"));
+		speakSearch.setSelectedIcon(new ImageIcon(".\\Icon\\speaker.png"));
 		speakSearch.setForeground(Color.WHITE);
 		speakSearch.setBackground(new Color(255, 248, 220));
 		speakSearch.addActionListener(new ActionListener() {
@@ -380,13 +380,13 @@ public class App {
 		scrollPane_4.setViewportView(antonyms);
 		
 		backgroundSearch = new JLabel("");
-		backgroundSearch.setIcon(new ImageIcon("D:\\Eclipse\\TuDien\\Background\\DarkTheme\\Pink.jpg"));
+		backgroundSearch.setIcon(new ImageIcon(".\\Background\\DarkTheme\\Pink.jpg"));
 		backgroundSearch.setBounds(0, 0, 1121, 712);
 		tabSearch.add(backgroundSearch);
 		
 		
 		lblNewLabel_3 = new JLabel("New label");
-		lblNewLabel_3.setIcon(new ImageIcon("D:\\Eclipse\\TuDien\\Background\\DarkTheme\\Pink.jpg"));
+		lblNewLabel_3.setIcon(new ImageIcon(".\\Background\\DarkTheme\\Pink.jpg"));
 		lblNewLabel_3.setBounds(-20, 0, 699, 714);
 		
 		tabTranslate = new JPanel();
@@ -423,20 +423,20 @@ public class App {
 		speakTranslate1 = new JButton("");
 		speakTranslate1.setBorder(null);
 		speakTranslate1.setBackground(Color.WHITE);
-		speakTranslate1.setIcon(new ImageIcon("D:\\Eclipse\\TuDien\\Icon\\volume32pixels.png"));
+		speakTranslate1.setIcon(new ImageIcon(".\\Icon\\volume32pixels.png"));
 		speakTranslate1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (mute2) {
 					MyLib.TextToSpeech.closePlayer();
 					mute2 = false;
-					speakTranslate2.setIcon(new ImageIcon("D:\\Eclipse\\TuDien\\Icon\\volume32pixels.png"));
+					speakTranslate2.setIcon(new ImageIcon(".\\Icon\\volume32pixels.png"));
 					speakTranslate2.setEnabled(true);
 					}
 				
 				if (mute1) {
 					MyLib.TextToSpeech.closePlayer();
 					mute1 = false;
-					speakTranslate1.setIcon(new ImageIcon("D:\\Eclipse\\TuDien\\Icon\\volume32pixels.png"));
+					speakTranslate1.setIcon(new ImageIcon(".\\Icon\\volume32pixels.png"));
 					return;
 				}
 				try {
@@ -445,7 +445,7 @@ public class App {
 					MyLib.TextToSpeech.dowloadVoiceText(readTranslate.getText(),language, (String) listVoice1.getSelectedItem() , (int) speed1.getValue());
 					mute1 = true;
 					speak(MyLib.TextToSpeech.buildPathKey(readTranslate.getText()), (String) listVoice1.getSelectedItem(), (int) speed1.getValue(), speakTranslate1);		
-					speakTranslate1.setIcon(new ImageIcon("D:\\Eclipse\\TuDien\\Icon\\mute.png"));
+					speakTranslate1.setIcon(new ImageIcon(".\\Icon\\mute.png"));
 					//)
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
@@ -488,7 +488,7 @@ public class App {
 		scrollPane_2.setViewportView(writeTranslate);
 		
 		speakTranslate2 = new JButton("");
-		speakTranslate2.setIcon(new ImageIcon("D:\\Eclipse\\TuDien\\Icon\\volume32pixels.png"));
+		speakTranslate2.setIcon(new ImageIcon(".\\Icon\\volume32pixels.png"));
 		speakTranslate2.setBorder(null);
 		speakTranslate2.setBackground(Color.WHITE);
 		speakTranslate2.addActionListener(new ActionListener() {
@@ -497,13 +497,13 @@ public class App {
 				if (mute1) {
 					MyLib.TextToSpeech.closePlayer();
 					mute1 = false;
-					speakTranslate1.setIcon(new ImageIcon("D:\\Eclipse\\TuDien\\Icon\\volume32pixels.png"));
+					speakTranslate1.setIcon(new ImageIcon(".\\Icon\\volume32pixels.png"));
 					speakTranslate1.setEnabled(true);
 					}
 				if (mute2) {
 					MyLib.TextToSpeech.closePlayer();
 					mute2 = false;
-					speakTranslate2.setIcon(new ImageIcon("D:\\Eclipse\\TuDien\\Icon\\volume32pixels.png"));
+					speakTranslate2.setIcon(new ImageIcon(".\\Icon\\volume32pixels.png"));
 					return;
 				}
 				try {
@@ -512,7 +512,7 @@ public class App {
 					MyLib.TextToSpeech.dowloadVoiceText(writeTranslate.getText(),language, (String) listVoice2.getSelectedItem() , (int) speed2.getValue());
 					speak(MyLib.TextToSpeech.buildPathKey(writeTranslate.getText()), (String) listVoice2.getSelectedItem(), (int) speed2.getValue(), speakTranslate2);
 					mute2 = true;
-					speakTranslate2.setIcon(new ImageIcon("D:\\Eclipse\\TuDien\\Icon\\mute.png"));
+					speakTranslate2.setIcon(new ImageIcon(".\\Icon\\mute.png"));
 					//)
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
@@ -537,7 +537,7 @@ public class App {
 		panel_3.add(speed2);
 		
 		swapLanguage = new JButton("");
-		swapLanguage.setIcon(new ImageIcon("D:\\Eclipse\\TuDien\\Icon\\swap.png"));
+		swapLanguage.setIcon(new ImageIcon(".\\Icon\\swap.png"));
 		swapLanguage.setBorder(null);
 		swapLanguage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -620,7 +620,7 @@ public class App {
 		
 		translateButton = new JButton("");
 		translateButton.setBackground(new Color(211, 211, 211));
-		translateButton.setIcon(new ImageIcon("D:\\Eclipse\\TuDien\\Icon\\preview.png"));
+		translateButton.setIcon(new ImageIcon(".\\Icon\\preview.png"));
 		translateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				translate();
@@ -644,7 +644,7 @@ public class App {
 		tabTranslate.add(detectLanguage);
 		
 		backGroundTranslate = new JLabel("");
-		backGroundTranslate.setIcon(new ImageIcon("D:\\Eclipse\\TuDien\\Background\\DarkTheme\\Pink.jpg"));
+		backGroundTranslate.setIcon(new ImageIcon(".\\Background\\DarkTheme\\Pink.jpg"));
 		backGroundTranslate.setBounds(0, -32, 1104, 731);
 		tabTranslate.add(backGroundTranslate);
 		
@@ -782,7 +782,7 @@ public class App {
 				}
 				speaker.setEnabled(true);
 				try {
-					speaker.setIcon(new ImageIcon("D:\\Eclipse\\TuDien\\Icon\\mute.png"));
+					speaker.setIcon(new ImageIcon(".\\Icon\\mute.png"));
 					MyLib.TextToSpeech.playerIsPlaying = true; 
 					TextToSpeech.speech(voiceName, speed, keyPath);
 					while (true) {
@@ -795,7 +795,7 @@ public class App {
 					if (speaker == speakTranslate1) mute1 = false;
 					if (speaker == speakTranslate2) mute2 = false;
 					speaker.setEnabled(true);
-					speaker.setIcon(new ImageIcon("D:\\Eclipse\\TuDien\\Icon\\volume32pixels.png"));			
+					speaker.setIcon(new ImageIcon(".\\Icon\\volume32pixels.png"));			
 					
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
